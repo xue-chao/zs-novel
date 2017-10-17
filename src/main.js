@@ -1,15 +1,17 @@
 import Vue from 'vue'
-import App from './App'
+import FastClick from 'fastclick'
+import VueRouter from 'vue-router'
 import router from './router'
-import fastclick from 'fastclick'
+import App from './App'
+
+Vue.use(VueRouter)
+
+FastClick.attach(document.body)
 
 Vue.config.productionTip = false
 
-fastclick.attach(document.body)
-
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
   router,
   render: h => h(App)
-})
+}).$mount('#app-box')

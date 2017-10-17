@@ -1,7 +1,6 @@
-'use strict'
-const utils = require('./utils')
-const config = require('../config')
-const isProduction = process.env.NODE_ENV === 'production'
+var utils = require('./utils')
+var config = require('../config')
+var isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = {
   loaders: utils.cssLoaders({
@@ -10,10 +9,9 @@ module.exports = {
       : config.dev.cssSourceMap,
     extract: isProduction
   }),
-  transformToRequire: {
-    video: 'src',
-    source: 'src',
-    img: 'src',
-    image: 'xlink:href'
-  }
+  postcss: [
+    require('autoprefixer')({
+      browsers: ['iOS >= 7', 'Android >= 4.1']
+    })
+  ]
 }

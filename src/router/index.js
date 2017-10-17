@@ -7,8 +7,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: (resolve) => { require(['@/components/Index'], resolve) }
+      name: 'bookshelf',
+      component: (resolve) => { require(['@/components/bookshelf/BookShelf'], resolve) }
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: (resolve) => { require(['@/components/search/Search'], resolve) }
     }
   ]
 })

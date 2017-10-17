@@ -1,20 +1,24 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view></router-view>
+    <tab></tab>
   </div>
 </template>
 
 <script>
+import Tab from './components/tab/Tab'
+
 export default {
-  name: 'app'
-}
+  name: 'app',
+  components: {
+    Tab
+  }}
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+<style lang="less">
+@import '~vux/src/styles/reset.less';
+
+body {
+  background-color: #fbf9fe;
 }
 </style>
