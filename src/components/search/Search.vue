@@ -1,25 +1,41 @@
 <template>
   <div>
-    {{msg}}
+    <search
+      :results="results"
+      v-model="searchValue"
+      position="absolute"
+      @on-submit="searchDate"
+      ref="search"></search>
+
   </div>
 </template>
 
 <script>
-  import { Tabbar, TabbarItem, Icon } from 'vux'
+  import { Search } from 'vux'
+  import axios from 'common/js/axios'
 
   export default {
     components: {
-      Tabbar,
-      TabbarItem,
-      Icon
+      Search
     },
     data () {
       return {
-        // note: changing this line won't causes changes
-        // with hot-reload because the reloaded component
-        // preserves its current state and we are modifying
-        // its initial state.
-        msg: '搜锁!'
+        results: [],
+        searchValue: ''
+      }
+    },
+    methods: {
+      searchDate: function (data) {
+        console.log(this.searchValue)
+        axios.get('/search', {
+          params: {
+            keyword: data
+          }
+        }).then((res) => {
+          if (res.data.code === 1) {
+            console.log(res.data)
+          }
+        })
       }
     }
   }
