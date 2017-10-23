@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import Tab from './components/tab/Tab'
+import Tab from './components/tab/Tab';
 
 export default {
   name: 'app',
   components: {
     Tab
-  }}
+  }};
 </script>
 
 <style lang="less">

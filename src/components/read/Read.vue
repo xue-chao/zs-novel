@@ -14,9 +14,9 @@
         // preserves its current state and we are modifying
         // its initial state.
         msg: '阅读'
-      }
+      };
     }
-  }
+  };
 </script>
 
 <style>

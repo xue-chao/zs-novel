@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import { Tabbar, TabbarItem } from 'vux'
+  import { Tabbar, TabbarItem } from 'vux';
 
   export default {
     components: {
@@ -20,9 +20,9 @@
     data () {
       return {
         msg: 'Hello World!'
-      }
+      };
     }
-  }
+  };
 </script>
 
 <style>

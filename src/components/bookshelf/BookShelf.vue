@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import { Tabbar, TabbarItem, Icon } from 'vux'
+  import { Tabbar, TabbarItem, Icon } from 'vux';
 
   export default {
     components: {
@@ -20,9 +20,9 @@
         // preserves its current state and we are modifying
         // its initial state.
         msg: '书架!'
-      }
+      };
     }
-  }
+  };
 </script>
 
 <style>
