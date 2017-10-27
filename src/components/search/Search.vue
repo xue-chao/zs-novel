@@ -15,30 +15,41 @@
         </div>
       </div>
     </scroll>
+    <div v-transfer-dom>
+      <loading :show="showLoading" :text="Loadingtext"></loading>
+    </div>
   </div>
 </template>
 
 <script>
-  import { Search, Panel } from 'vux';
+  import { Search, Panel, Loading, TransferDomDirective as TransferDom } from 'vux';
   import axios from 'common/js/axios';
   import Scroll from 'common/js/scroll';
 
   export default {
+    directives: {
+      TransferDom
+    },
     components: {
       Search,
       Panel,
-      Scroll
+      Scroll,
+      Loading
     },
     data () {
       return {
         results: [],
         searchValue: '',
-        list: []
+        list: [],
+        showLoading: false,
+        Loadingtext: '正在加载'
       };
     },
     methods: {
       searchDate: function (data) {
         let that = this;
+        this.$refs.search.setBlur();
+        this.showLoading = true;
         axios.get('/search', {
           params: {
             keyword: data
@@ -58,6 +69,9 @@
             that.list = tempList;
             that.$refs.scroll.refresh();
           }
+          that.showLoading = false;
+        }).catch(() => {
+          that.showLoading = false;
         });
       }
     }
