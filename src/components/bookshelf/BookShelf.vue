@@ -61,13 +61,6 @@
           params: { bookData: item.data }
         });
       }
-    },
-    watch: {
-      $route (param) {
-        if (param.name === 'bookshelf') {
-          this.$emit('showTab');
-        }
-      }
     }
   };
 </script>

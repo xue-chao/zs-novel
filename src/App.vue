@@ -5,7 +5,7 @@
         <router-view class="child-view" v-on:showTab="showTab" v-on:hideTab="hideTab" ></router-view>
       </keep-alive>
     </transition>
-    <tab v-show="isShow"></tab>
+    <tab v-show="isShow" v-on:showTab="showTab" v-on:hideTab="hideTab"></tab>
   </div>
 </template>
 

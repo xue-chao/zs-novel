@@ -16,6 +16,19 @@
     components: {
       Tabbar,
       TabbarItem
+    },
+    watch: {
+      $route (param) {
+        if (param.name === 'bookshelf') {
+          this.$emit('showTab');
+        } else if (param.name === 'search') {
+          this.$emit('showTab');
+        } else if (param.name === 'read') {
+          this.$emit('hideTab');
+        } else if (param.name === 'sources') {
+          this.$emit('hideTab');
+        }
+      }
     }
   };
 </script>

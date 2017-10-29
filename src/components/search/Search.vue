@@ -93,13 +93,6 @@
           }
         });
       }
-    },
-    watch: {
-      $route (param) {
-        if (param.name === 'search') {
-          this.$emit('showTab');
-        }
-      }
     }
   };
 </script>

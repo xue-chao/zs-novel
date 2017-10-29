@@ -19,6 +19,11 @@ export default new Router({
       path: '/read',
       name: 'read',
       component: (resolve) => { require(['@/components/read/Read'], resolve); }
+    },
+    {
+      path: '/sources',
+      name: 'sources',
+      component: (resolve) => { require(['@/components/read/Sources'], resolve); }
     }
   ]
 });

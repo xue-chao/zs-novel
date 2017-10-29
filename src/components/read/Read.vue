@@ -1,11 +1,9 @@
 <template>
   <div>
     <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">{{title}}</x-header>
-
     <div v-transfer-dom>
-      <actionsheet :menus="menus" v-model="showMenus"></actionsheet>
+      <actionsheet :menus="menus" v-model="showMenus" @on-click-menu="clickMenu"></actionsheet>
     </div>
-
   </div>
 </template>
 
@@ -24,8 +22,8 @@
       return {
         title: '',
         menus: {
-          menu1: '目录',
-          menu2: '换源'
+          chapters: '目录',
+          sources: '换源'
         },
         showMenus: false
       };
@@ -37,14 +35,26 @@
         this.title = bookData.lastChapter;
       }
     },
+    methods: {
+      clickMenu (key) {
+        if (key === 'chapters') {
+          this.$router.push({
+            name: 'chapters',
+            params: { bookData: this.$route.params.bookData }
+          });
+        } else if (key === 'sources') {
+          this.$router.push({
+            name: 'sources',
+            params: { bookData: this.$route.params.bookData }
+          });
+        }
+      }
+    },
     watch: {
       $route (param) {
         let bookData = this.$route.params.bookData;
         if (bookData) {
           this.title = bookData.lastChapter;
-        }
-        if (param.name === 'read') {
-          this.$emit('showTab');
         }
       }
     }
