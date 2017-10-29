@@ -3,9 +3,10 @@ export default {
     let books = window.localStorage.getItem('bookShelf');
     books = books ? JSON.parse(books) : [];
     let flag = true;
-    for (let book of books) {
-      if (book['_id'] === item['_id']) {
+    for (let key in books) {
+      if (books[key]['_id'] === item['_id']) {
         flag = false;
+        books[key] = item;
       }
     }
     if (flag) {

@@ -40,6 +40,9 @@
       Scroll,
       Loading
     },
+    mounted () {
+      this.$emit('showTab');
+    },
     data () {
       return {
         results: [],
@@ -89,6 +92,13 @@
             Store.addShelf(item.data);
           }
         });
+      }
+    },
+    watch: {
+      $route (param) {
+        if (param.name === 'search') {
+          this.$emit('showTab');
+        }
       }
     }
   };

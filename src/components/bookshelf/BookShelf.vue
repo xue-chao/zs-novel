@@ -13,6 +13,7 @@
 <script>
   import { Scroller, Panel } from 'vux';
   import Store from 'common/js/store';
+  import bookInfo from 'api/bookInfo';
 
   export default {
     components: {
@@ -29,10 +30,12 @@
       };
     },
     mounted () {
+      this.$emit('showTab');
       this.setList();
     },
     methods: {
       load () {
+        bookInfo.refreshBook();
         setTimeout(() => {
           this.setList();
           this.status.pulldownStatus = 'default';
@@ -52,8 +55,18 @@
         }
         this.list = tempList;
       },
-      onClickItem () {
-        alert('功能开发中');
+      onClickItem (item) {
+        this.$router.push({
+          name: 'read',
+          params: { bookData: item.data }
+        });
+      }
+    },
+    watch: {
+      $route (param) {
+        if (param.name === 'bookshelf') {
+          this.$emit('showTab');
+        }
       }
     }
   };

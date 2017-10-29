@@ -16,11 +16,6 @@
     components: {
       Tabbar,
       TabbarItem
-    },
-    data () {
-      return {
-        msg: 'Hello World!'
-      };
     }
   };
 </script>

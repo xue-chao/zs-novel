@@ -2,10 +2,10 @@
   <div id="app">
     <transition :name="transitionName">
       <keep-alive>
-        <router-view class="child-view"></router-view>
+        <router-view class="child-view" v-on:showTab="showTab" v-on:hideTab="hideTab" ></router-view>
       </keep-alive>
     </transition>
-    <tab></tab>
+    <tab v-show="isShow"></tab>
   </div>
 </template>
 
@@ -19,8 +19,17 @@ export default {
   },
   data () {
     return {
-      transitionName: 'slide-left'
+      transitionName: 'slide-left',
+      isShow: true
     };
+  },
+  methods: {
+    showTab () {
+      this.isShow = true;
+    },
+    hideTab () {
+      this.isShow = false;
+    }
   },
   // 监听路由的路径，可以通过不同的路径去选择不同的切换效果
   watch: {
