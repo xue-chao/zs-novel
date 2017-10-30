@@ -24,5 +24,17 @@ export default {
     }).then((res) => {
       return res.data;
     });
+  },
+  chapters (_id) {
+    // 书源ID
+    return axios.get('/book-chapters/' + _id).then((res) => {
+      return res.data;
+    });
+  },
+  getContent (url) {
+    url = encodeURIComponent(url);
+    return axios.get('/chapters/' + url).then((res) => {
+      return res.data;
+    });
   }
 };

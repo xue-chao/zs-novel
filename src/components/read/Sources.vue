@@ -8,12 +8,15 @@
         </div>
       </div>
     </scroller>
+    <div v-transfer-dom>
+      <loading :show="showLoading" :text="Loadingtext"></loading>
+    </div>
   </div>
 </template>
 
 <script>
-  import { Scroller, Panel, XHeader, Actionsheet, TransferDom } from 'vux';
-  // import Store from 'common/js/store';
+  import { Scroller, Panel, XHeader, Actionsheet, TransferDom, Loading } from 'vux';
+  import Store from 'common/js/store';
   import bookInfo from 'api/bookInfo';
 
   export default {
@@ -25,13 +28,16 @@
       XHeader,
       Actionsheet,
       Scroller,
-      Panel
+      Panel,
+      Loading
     },
     data () {
       return {
         scrollerHeight: (window.innerHeight - 46) + 'px',
         list: [],
-        title: ''
+        title: '',
+        showLoading: false,
+        Loadingtext: '正在切换'
       };
     },
     mounted () {
@@ -61,10 +67,24 @@
         });
       },
       onClickItem (item) {
-        this.$router.push({
-          name: 'read',
-          params: { soureData: item.data }
+        this.showLoading = true;
+        bookInfo.chapters(item.data['_id']).then((data) => {
+          if (data.code === 1) {
+            Store.saveSource(data.data['book'], data.data);
+          }
+          this.showLoading = false;
         });
+      }
+    },
+    watch: {
+      $route (param) {
+        if (param.name === 'sources') {
+          let bookData = this.$route.params.bookData;
+          if (bookData) {
+            this.title = bookData.title;
+          }
+          this.setList(bookData['_id']);
+        }
       }
     }
   };

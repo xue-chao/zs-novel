@@ -17,5 +17,14 @@ export default {
   getShelf () {
     let books = window.localStorage.getItem('bookShelf');
     return books ? JSON.parse(books) : [];
+  },
+  saveSource (_id, data) {
+    window.localStorage.setItem(_id, JSON.stringify(data));
+  },
+  getReadIndex (_id) {
+    return window.localStorage.getItem(_id + '_index');
+  },
+  setReadIndex (_id, index) {
+    window.localStorage.setItem(_id + '_index', index);
   }
 };
