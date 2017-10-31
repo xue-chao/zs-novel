@@ -1,7 +1,7 @@
 <template>
   <div>
     <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">{{title}}</x-header>
-    <p>{{text}}</p>
+    <div class="content" v-html="text"></div>
     <div v-transfer-dom>
       <actionsheet :menus="menus" v-model="showMenus" @on-click-menu="clickMenu"></actionsheet>
     </div>
@@ -23,7 +23,7 @@
     },
     data () {
       return {
-        title: '',
+        title: '载入中...',
         menus: {
           chapters: '目录',
           sources: '换源'
@@ -36,7 +36,6 @@
       this.$emit('hideTab');
       let bookData = this.$route.params.bookData;
       if (bookData) {
-        this.title = bookData.lastChapter;
         this.setSource(bookData);
       }
     },
@@ -77,7 +76,7 @@
           bookInfo.getContent(info.link).then((data) => {
             if (data.code === 1) {
               this.title = data.data.chapter.title;
-              this.text = data.data.chapter.body;
+              this.text = data.data.chapter.body.replace(/\n/g, '<br>');
             }
           });
         }
@@ -100,8 +99,10 @@
       $route (param) {
         let bookData = this.$route.params.bookData;
         if (bookData) {
-          this.title = bookData.lastChapter;
           this.setSource(bookData);
+        } else {
+          this.title = '载入中';
+          this.text = null;
         }
       }
     }
@@ -109,5 +110,8 @@
 </script>
 
 <style>
-
+.content{
+  padding: 5px;
+  background-color: #C7EDCC;
+}
 </style>
