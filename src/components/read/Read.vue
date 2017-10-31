@@ -77,7 +77,7 @@
           bookInfo.getContent(info.link).then((data) => {
             if (data.code === 1) {
               this.title = data.data.chapter.title;
-              this.text = data.data.chapter.cpContent;
+              this.text = data.data.chapter.body;
             }
           });
         }
