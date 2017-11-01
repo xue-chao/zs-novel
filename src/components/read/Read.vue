@@ -113,5 +113,7 @@
 .content{
   padding: 5px;
   background-color: #C7EDCC;
+  line-height: 30px;
+  font-size: 18px;
 }
 </style>
