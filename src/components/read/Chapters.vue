@@ -17,10 +17,10 @@
 <script>
   import { Scroller, Panel, XHeader, Actionsheet, TransferDom, Loading } from 'vux';
   import Store from 'common/js/store';
-  import bookInfo from 'api/bookInfo';
+  // import bookInfo from 'api/bookInfo';
 
   export default {
-    name: 'sources',
+    name: 'chapters',
     directives: {
       TransferDom
     },
@@ -50,34 +50,25 @@
     },
     methods: {
       setList (_id) {
-        bookInfo.sources(_id).then((data) => {
-          if (data.code === 1) {
-            let soureData = data.data;
-            let tempList = [];
-            for (let i = 0; i < soureData.length; i++) {
-              tempList.push({
-                title: soureData[i].lastChapter,
-                desc: '地址：' + soureData[i].name,
-                url: '',
-                data: soureData[i]
-              });
-            }
-            this.list = tempList;
-          }
-        });
+        let book = Store.getBook(_id);
+        console.log(book);
+        let chapters = book.chapters;
+        let tempList = [];
+        for (let i = 0; i < chapters.length; i++) {
+          tempList.push({
+            title: chapters[i].title,
+            url: '',
+            dataIndex: i
+          });
+        }
+        this.list = tempList;
       },
       onClickItem (item) {
-        this.showLoading = true;
-        bookInfo.chapters(item.data['_id']).then((data) => {
-          if (data.code === 1) {
-            data.data.chapters = data.data.chapters.reverse();
-            Store.saveSource(data.data['book'], data.data);
-          }
-          this.showLoading = false;
-          this.$router.push({
-            name: 'read',
-            params: { bookData: data.data }
-          });
+        let bookData = this.$route.params.bookData;
+        Store.setReadIndex(bookData['_id'], item.dataIndex);
+        this.$router.push({
+          name: 'read',
+          params: { bookData: bookData }
         });
       }
     },

@@ -21,6 +21,10 @@ export default {
   saveSource (_id, data) {
     window.localStorage.setItem(_id, JSON.stringify(data));
   },
+  getBook (_id) {
+    let book = window.localStorage.getItem(_id);
+    return book ? JSON.parse(book) : [];
+  },
   getReadIndex (_id) {
     return window.localStorage.getItem(_id + '_index');
   },
