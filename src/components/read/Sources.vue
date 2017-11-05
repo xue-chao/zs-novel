@@ -70,7 +70,7 @@
         this.showLoading = true;
         bookInfo.chapters(item.data['_id']).then((data) => {
           if (data.code === 1) {
-            data.data.chapters = data.data.chapters.reverse();
+            data.data.chapters = data.data.chapters;
             Store.saveSource(data.data['book'], data.data);
           }
           this.showLoading = false;

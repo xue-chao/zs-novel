@@ -51,10 +51,9 @@
     methods: {
       setList (_id) {
         let book = Store.getBook(_id);
-        console.log(book);
         let chapters = book.chapters;
         let tempList = [];
-        for (let i = 0; i < chapters.length; i++) {
+        for (let i = chapters.length - 1; i >= 0; i--) {
           tempList.push({
             title: chapters[i].title,
             url: '',
@@ -62,6 +61,7 @@
           });
         }
         this.list = tempList;
+        this.$refs.scroller.reset();
       },
       onClickItem (item) {
         let bookData = this.$route.params.bookData;

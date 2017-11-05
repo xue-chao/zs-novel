@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">{{title}}</x-header>
+    <x-header :left-options="{preventGoBack: true}" :right-options="{showMore: true}" @on-click-back="clickBack" @on-click-more="showMenus = true">{{title}}</x-header>
     <div class="content" v-html="text"></div>
     <div v-transfer-dom>
       <actionsheet :menus="menus" v-model="showMenus" @on-click-menu="clickMenu"></actionsheet>
@@ -93,6 +93,11 @@
             params: { bookData: this.$route.params.bookData }
           });
         }
+      },
+      clickBack () {
+        this.$router.push({
+          name: 'bookshelf'
+        });
       }
     },
     watch: {
