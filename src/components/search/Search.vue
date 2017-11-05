@@ -24,7 +24,7 @@
 <script>
   import Vue from 'vue';
   import { Search, Panel, Loading, TransferDomDirective as TransferDom, ConfirmPlugin } from 'vux';
-  import axios from 'common/js/axios';
+  import bookInfo from 'api/bookInfo';
   import Scroll from 'common/js/scroll';
   import Store from 'common/js/store';
 
@@ -57,11 +57,7 @@
         let that = this;
         this.$refs.search.setBlur();
         this.showLoading = true;
-        axios.get('/search', {
-          params: {
-            keyword: data
-          }
-        }).then((res) => {
+        bookInfo.search(data).then((res) => {
           if (res.data.code === 1 && res.data.data.books) {
             let books = res.data.data.books;
             let tempList = [];

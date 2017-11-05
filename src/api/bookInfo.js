@@ -1,9 +1,10 @@
 import axios from 'common/js/axios';
 import Store from 'common/js/store';
+import Api from './api';
 
 export default {
   info (_id) {
-    return axios.get('/book-info/' + _id).then((res) => {
+    return axios.get(Api.book.bookInfo + _id).then((res) => {
       return res.data;
     });
   },
@@ -16,7 +17,7 @@ export default {
     }
   },
   sources (_id) {
-    return axios.get('/book-sources', {
+    return axios.get(Api.book.bookSources, {
       params: {
         view: 'summary',
         book: _id
@@ -27,14 +28,21 @@ export default {
   },
   chapters (_id) {
     // 书源ID
-    return axios.get('/book-chapters/' + _id).then((res) => {
+    return axios.get(Api.book.bookChapters + _id + '?view=chapters').then((res) => {
       return res.data;
     });
   },
   getContent (url) {
     url = encodeURIComponent(url);
-    return axios.get('/chapters/' + url).then((res) => {
+    return axios.get(Api.book.chapterContent + url).then((res) => {
       return res.data;
+    });
+  },
+  search (data) {
+    return axios.get(Api.book.bookSearch, {
+      params: {
+        query: data
+      }
     });
   }
 };
